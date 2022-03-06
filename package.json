@@ -1,0 +1,13 @@
+{
+    "dependencies": {
+        "@types/xlsx": "^0.0.36",
+        "ts-node": "^10.6.0",
+        "tsc": "^2.0.4",
+        "xlsx": "^0.18.2"
+    },
+    "scripts": {
+        "amplify-modelgen": "node amplify\\scripts\\amplify-modelgen.js",
+        "amplify-push": "node amplify\\scripts\\amplify-push.js",
+        "test": ".\\node_modules\\.bin\\ts-node test.ts"
+    }
+}
