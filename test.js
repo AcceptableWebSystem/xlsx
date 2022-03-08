@@ -1,22 +1,26 @@
 "use strict";
-const xlsx = require('xlsx');
-const utils = xlsx.utils;
-
-let workbook = xlsx.readFile('test.xlsx', {
-    cellDates: true
-});
+exports.__esModule = true;
+// 文字列連結サンプル
+var XLSX = require("./node_modules/xlsx");
+"use strict";
+var utils = XLSX.utils;
+// workbookの読み込み
+var workbook = XLSX.readFile('test.xlsx');
 //シートの読み込み
-let worksheet = workbook.Sheets['Sheet1'];
-
-console.log(worksheet);
-
+var worksheet = workbook.Sheets['Sheet1'];
 //セルの範囲
-// let range = worksheet['test'];
-// let rangeVal = utils.decode_range(range);
-// for (let r = rangeVal.s.r; r <= rangeVal.e.r; r++) {
-//     for (let c = rangeVal.s.c; c <= rangeVal.e.c; c++) {
-//         let adr = utils.encode_cell({ c: c, r: r });
-//         let cell = worksheet[adr];
-//         console.log(`${adr} type:${cell.t} value:${cell.v} text:${cell.w}`);
-//     }
-// }
+var range = worksheet['!ref'];
+var rangeVal = utils.decode_range(range); // { s: { c: 0, r: 0 }, e: { c: 3, r: 8 } }
+// 文字列連結の変数
+var text = "";
+for (var r = rangeVal.s.r; r <= rangeVal.e.r; r++) {
+    for (var c = rangeVal.s.c; c <= rangeVal.e.c; c++) {
+        var adr = utils.encode_cell({ c: c, r: r });
+        var cell = worksheet[adr];
+        // 空白セルはundefined
+        if (cell) {
+            text = text + cell.w;
+        }
+    }
+}
+console.log(text);
